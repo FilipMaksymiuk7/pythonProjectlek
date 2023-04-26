@@ -1,1 +1,33 @@
-eee
+import numpy as np
+import pandas as pd
+
+# print(df)
+# df = pd.read_csv('imiona.xlsx', header=None,sep=' ',decimal='.')
+
+# xlsx = pd.ExcelFile('wyniki.xlsx')
+# df = pd.read_excel(xlsx,header=0)
+# print(df)
+
+#zad1
+xlsx = pd.ExcelFile('imiona.xlsx')
+df = pd.read_excel(xlsx,header=0)
+print(df)
+
+#zad2
+#1
+print('pkt1')
+print(df[(df['Liczba']>1000)])
+#2
+print('pkt2')
+print(df[(df['Imie']=="FILIP")])
+#3
+print(df.groupby(['Rok']).agg({'Liczba':['sum']}))
+#4
+
+#5
+print(df.groupby(['Plec']).agg({'Liczba':['sum']}))
+
+#zad3
+# zamowienia = pd.read_csv('zamowienia.csv')
+# print(zamowienia)
+
