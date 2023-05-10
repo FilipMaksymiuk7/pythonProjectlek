@@ -109,5 +109,152 @@ df_2005 = df[df['Data zamowienia'].dt.year == 2005]
 df_2005.to_csv('zamowienia_2005.csv', index=False)
 
 
+import math
+import time
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from PIL import Image
+# y = np.arange(4)
+# plt.plot(y)
+# plt.ylabel('liczby')
+# plt.show()
+
+# x = np.array([1,2,3,4])
+# y = x**2
+#
+# #ro- kolor czerwony -,:,--,styl lini 'o' kropki na linii
+# plt.plot(x, y, 'go--')
+# plt.axis([0,6,0,20])
+# plt.show()
+#
+# plt.plot(x, y, 'g')
+# plt.plot(x, y, 'o')
+# plt.axis([0,6,0,20])
+# plt.show()
+#
+# a = np.arange(0,5,0.2)
+# plt.plot(a,a,'r--',a,a**2,'bs',a,a**3,'g^')
+# #loc ma duzo wlasciowsci
+# plt.legend(labels=['liniowa','kwadratowa','sześcienna'],loc='center left')
+# plt.show()
+#zrob 3 oddzielne labele wykresy
+# a = np.arange(0,5,0.2)
+# c = plt.plot(a,a,'r--',label='czerwona')
+# plt.plot(a,a**2,'bs',label='niebieska')
+# plt.plot(a,a**3,'g^',label='zielona')
+# plt.legend(labels=['r','b','g'])
+# plt.xlabel('etykieta x')
+# plt.ylabel('etykieta y')
+# plt.title('wykres linowy')
+# plt.legend()
+#plt.savefig('wykres1.png')
+plt.show()
+# img = Image.open('wykres1.png')
+# img = img.convert('RGB')
+# img.save('wykres.jpg')
+
+#2zad
+#wykres liniowy sinusa na przedziale dal x od <0,10> z krokiem 0.1
+
+# x = np.arange(0,10.1,0.1)
+# y= np.sin(x)
+# plt.plot(x,y,'g')
+# plt.title('wykres sinusa')
+# plt.ylabel('y')
+# plt.xlabel('x')
+# plt.show()
+
+data = {'a':np.arange(50),
+        'c':np.random.randint(0,50,50),
+        'd':np.random.randn(50)}
+data['b']=data['a'] + 10 * np.random.randn(50)
+data['d']=np.abs(data['d']) * 100
+plt.scatter('a','b',c='c',s='d',data=data,cmap='prism')
+plt.xlabel('wartosci a')
+plt.xlabel('wartosci b')
+plt.show()
+
+# x1 = np.arange(0,2,0.02)
+# x2 = np.arange(0,2,0.02)
+# y1 = np.sin(2 *np.pi *x1)
+# y2 = np.cos(2 *np.pi *x2)
+#
+#
+# plt.subplot(2,1,1)
+# plt.plot(x1,y1)
+# plt.title('Wykres sin(x)')
+# plt.xlabel('x')
+# plt.ylabel('sin(x)')
+#
+#
+# plt.subplot(2,1,2)
+# plt.plot(x2,y2,'g')
+# plt.xlabel('x')
+# plt.ylabel('cos(x)')
+# plt.title('wykres cos(x)')
+# plt.subplots_adjust(hspace=0.5)
+# plt.show()
+#
+#
+#
+
+#
+x1 = np.arange(0,2,0.02)
+x2 = np.arange(0,2,0.02)
+y1 = np.sin(2 *np.pi *x1)
+y2 = np.cos(2 *np.pi *x2)
+#
+#
+# plt.subplot(4,1,1)
+# plt.plot(x1,y1)
+# plt.title('Wykres sin(x)')
+# plt.xlabel('x')
+# plt.ylabel('sin(x)')
+#
+#
+# plt.subplot(4,1,4)
+# plt.plot(x2,y2,'g')
+# plt.xlabel('x')
+# plt.ylabel('cos(x)')
+# plt.title('wykres cos(x)')
+# plt.subplots_adjust(hspace=0.5)
+# plt.show()
+#
+# fig, axs = plt.subplots(3, 2)
+# axs[0,0].plot(x1,y1,'g-')
+# axs[0,0].set_xlabel('x')
+# axs[0,0].set_ylabel('sin(x)')
+# axs[0,0].set_title('wykres sin(x)')
+#
+# axs[1,1].plot(x2,y2,'b-')
+# axs[1,1].set_xlabel('x')
+# axs[1,1].set_ylabel('cosx)')
+# axs[1,1].set_title('wykres cos(x)')
+#
+# axs[2,0].plot(x2,y2,'b-')
+# axs[2,0].set_xlabel('x')
+# axs[2,0].set_ylabel('cosx)')
+# axs[2,0].set_title('wykres cos(x)')
+#
+# fig.delaxes(axs[0,1])
+# fig.delaxes(axs[1,0])
+# fig.delaxes(axs[2,1])
+# plt.show()
+#
+
+data = {'Kraj':['Belgia','Indie','Brazylia','Polska'],
+        'Stolica':['Bruksela','New Delhi','Brasilia','Warszawa'],
+        'Kontynent':['Europa','Azja','Ameryka Południowa','Europa'],
+        'Populacja':[11198846,110318135,20784758,12334512]}
+df = pd.DataFrame(data)
+print(df)
+grupa = df.groupby('Kontynent')
+etykiety = list(grupa.groups.keys())
+wartosc = list(grupa.agg('Populacja').sum())
+plt.bar(etykiety,wartosc,color=['red','green','blue'])
+plt.xlabel('Kontynenty')
+plt.ylabel('Populacja w mld')
+plt.show()
 
