@@ -108,7 +108,7 @@ df_2004.to_csv('zamowienia_2004.csv', index=False)
 df_2005 = df[df['Data zamowienia'].dt.year == 2005]
 df_2005.to_csv('zamowienia_2005.csv', index=False)
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import math
 import time
 
@@ -432,4 +432,91 @@ grupa = df.groupby('Imię i nazwisko').agg({'Wartość zamówienia':['sum']})
 print(grupa)
 grupa.plot(kind='pie',subplots=True,autopct='%2.f%%',fontsize=20,colors=['green','blue'])
 plt.show()
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from PIL import Image
+
+# 1 Wczytanie danych z pliku Excel
+data = pd.read_excel('imiona.xlsx')
+
+# Grupowanie danych po roku i sumowanie liczby urodzeń
+grouped_data = data.groupby('Rok')['Liczba'].sum()
+
+# Tworzenie wykresu liniowego
+plt.plot(grouped_data.index, grouped_data.values)
+plt.xlabel('Rok')
+plt.ylabel('Liczba urodzeń')
+plt.title('Liczba urodzeń dla każdego roku')
+plt.grid(True)
+plt.show()
+
+
+
+# 2 Wczytanie danych z pliku Excel
+data = pd.read_excel('imiona.xlsx')
+
+# Grupowanie danych po płci i sumowanie liczby urodzeń
+grouped_data = data.groupby('Plec')['Liczba'].sum()
+
+# Tworzenie wykresu słupkowego
+grouped_data.plot(kind='bar')
+plt.xlabel('Płeć')
+plt.ylabel('Liczba urodzeń')
+plt.title('Liczba urodzeń chłopców i dziewczynek')
+plt.grid(True)
+plt.show()
+
+
+
+# 3Wczytanie danych z pliku Excela
+df = pd.read_excel('imiona.xlsx')
+
+# Filtrowanie danych dla ostatnich 5 lat
+df_last_5_years = df[df['Rok'] >= df['Rok'].max() - 4]
+
+# Grupowanie danych po płci
+df_gender = df_last_5_years.groupby('Plec')['Liczba'].sum()
+
+# Utworzenie wykresu kołowego
+plt.pie(df_gender, labels=df_gender.index, autopct='%1.1f%%')
+plt.title('Ilość urodzeń chłopców i dziewczynek\n w ostatnich 5 latach')
+plt.show()
+
+
+
+# 4Wczytanie danych z pliku CSV
+df = pd.read_csv('zamowienia.csv', delimiter=';')
+
+# Grupowanie danych po sprzedawcach i zliczanie zamówień
+df_sprzedawcy = df.groupby('Sprzedawca').size()
+
+# Utworzenie wykresu słupkowego
+df_sprzedawcy.plot(kind='bar')
+plt.title('Ilość złożonych zamówień przez sprzedawców')
+plt.xlabel('Sprzedawca')
+plt.ylabel('Ilość zamówień')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
